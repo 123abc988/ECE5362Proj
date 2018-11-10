@@ -1,0 +1,65 @@
+**************************
+***  ECE 5362, AU 2018 ***
+***  Machine Problem 2 ***
+***  Alexander Wilson  ***
+**************************
+***  Start fetch cycle 1 ***
+ st=0	rt='[pc] -> mar'	imar rac=1 rn=3
+ st=1	rt='[[mar]] -> mdr'	read
+ st=2	rt='[mdr] -> ir'	omdr iir
+ st=3	rt='[pc]+1 -> q'	rac=1 rn=3 ib p1 oadder newv newc
+ st=4	rt='[q] -> pc'		oq wac=1 wn=3 newz newn
+	cond='ir158'	value=0 nst=10
+	cond='ir1512'	value=0 nst=70
+	nst=10
+
+*** If any instructions are present except HALT or INC, a halt will occur. ***
+*** HALT execution cycle ***
+ st=10 halt
+
+*** If addressing mode requires a second word for an immediate number, fetch it ***
+*** Start fetch cycle 2 ***
+ st=20	rt='[pc] -> mar'	imar rac=1 rn=3
+ st=21	rt='[[mar]] -> mdr'	read
+ st=22	rt='[pc] + 1 -> q'	rac=1 rn=3 ib p1 oadder newv newc
+ st=23	rt='[q] -> pc'		oq wac=1 wn=3 newz newn
+
+	cond='ir64'	value=4 nst=25
+        cond='ir64'	value=5 nst=28
+ st=25	rt='[mdr] -> t1'	omdr it1
+ st=26	rt='[t1] + [r] -> q'	rac=3 ib oa oadder newv newc
+ st=27 	rt='[q] -> mar'		oq imar newz newn
+	nst=75
+
+ st=28	rt='[mdr] -> mar'	omdr imar
+	nst=75
+
+*** INC execution cycle ***
+*** Check DAD, if addressing modes not feasible a halt will occur ***
+ st=70
+	cond='ir64'	value=0 nst=80	
+        cond='ir64'	value=1 nst=74
+        cond='ir64'	value=2 nst=74
+        cond='ir64'	value=3 nst=71
+	cond='ir64'	value=4	nst=20
+	cond='ir64'	value=5 nst=20
+	nst=10
+
+*** Autodecrement ***
+ st=71	rt='[r] -> t1'		rac=3 it1
+ st=72	rt='[t1] - 1 -> q'	oa comp oadder newv newc
+ st=73	rt='[q] -> r'		oq wac=3 newz newn
+
+*** Register Indirect ***
+ st=74	rt='[r] -> mar'		rac=3 imar
+ st=75	rt='[[mar]] -> mdr'	read
+ st=76	rt='[mdr] + 1 -> q'	omdr ib p1 oadder newv newc
+ st=77	rt='[q] -> mdr'		oq imdr newz newn
+ st=78	rt='[mdr] -> [[mar]]'	write
+	cond='ir64'	value=2 nst=80
+ 	nst=0
+
+*** Register and Autoincrement ***
+ st=80	rt='[r]+1 -> q'		rac=3 ib p1 oadder newv newc
+ st=81	rt='[q] -> r'		oq wac=3 newz newn
+ 	nst=0
