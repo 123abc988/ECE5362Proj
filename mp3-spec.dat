@@ -109,7 +109,7 @@
 
 *** If any instructions are present except HALT or INC, a halt will occur. ***
 *** HALT execution cycle ***
- st=100 halt
+ st=35 halt
  
 
 
@@ -138,4 +138,3 @@
 **** Handle register ****
  st=75	rt='[q] -> r'		oq wac=3 newz newn
 	nst=0
-
