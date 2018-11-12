@@ -1,7 +1,7 @@
 **************************
 ***  ECE 5362, AU 2018 ***
 ***  Machine Problem 3 ***
-***  Andrew Maloney    ***
+***  Andrew  Maloney   ***
 ***  Alexander Wilson  ***
 **************************
 ***  Start fetch cycle 1 ***
@@ -10,30 +10,111 @@
  st=2	rt='[mdr] -> ir'	omdr iir
  st=3	rt='[pc]+1 -> q'	rac=1 rn=3 ib p1 oadder newv newc
  st=4	rt='[q] -> pc'		oq wac=1 wn=3 newz newn
-	cond='ir158'	value=0 nst=10
-	cond='ir1512'	value=0 nst=70
-	nst=10
+*** Check Instruction Type: Halt; Single Operand; Double Operand ***
+	cond='ir158'	value=0 nst=100
+	cond='ir1512'	value=0 nst=22
 
-*** If any instructions are present except HALT or INC, a halt will occur. ***
-*** HALT execution cycle ***
- st=10 halt
 
-*** If addressing mode requires a second word for an immediate number, fetch it ***
-*** Start fetch cycle 2 ***
- st=20	rt='[pc] -> mar'	imar rac=1 rn=3
- st=21	rt='[[mar]] -> mdr'	read
- st=22	rt='[pc] + 1 -> q'	rac=1 rn=3 ib p1 oadder newv newc
- st=23	rt='[q] -> pc'		oq wac=1 wn=3 newz newn
+*** Move src information to temporary registers ***
+**** Check SAD ****
+ st=5
+	cond='ir108'	value=0 nst=10	
+        cond='ir108'	value=1 nst=14
+        cond='ir108'	value=2 nst=14
+        cond='ir108'	value=3 nst=11
 
-	cond='ir64'	value=4 nst=25
-        cond='ir64'	value=5 nst=28
- st=25	rt='[mdr] -> t1'	omdr it1
- st=26	rt='[t1] + [r] -> q'	rac=3 ib oa oadder newv newc
- st=27 	rt='[q] -> mar'		oq imar newz newn
-	nst=75
+*** Fetch additional word ***
+ st=6	rt='[pc] -> mar'	imar rac=1 rn=3
+ st=7	rt='[[mar]] -> mdr'	read
+ st=8	rt='[pc] + 1 -> q'	rac=1 rn=3 ib p1 oadder newv newc
+ st=9	rt='[q] -> pc'		oq wac=1 wn=3 newz newn
+*** If single-operand; index; absolute; immediate ***
+	cond='ir1512'	value=0 nst=23
+	cond='ir108'	value=4	nst=17
+	cond='ir108'	value=5 nst=20
+	cond='ir108'	value=6 nst=21
 
- st=28	rt='[mdr] -> mar'	omdr imar
-	nst=75
+*** Add src operand to t2 and src address to t3 ***
+**** Register ****
+ st=10	rt='[r] -> t2'		rac=3 it2
+	nst=22
+
+**** Autodecrement ****
+ st=11	rt='[r] -> t1'		rac=3 it1
+ st=12	rt='[t1] - 1 -> q'	oa comp oadder newv newc
+ st=13	rt='[q] -> r'		oq wac=3 newz newn
+
+**** Register Indirect and Autoincrement ****
+ st=14	rt='[r] -> mar&t3'	rac=3 imar it3
+ st=15	rt='[[mar]] -> mdr'	read
+ st=16	rt='[mdr] -> t2'	omdr it2 
+	nst=22
+
+*** Index ***
+ st=17	rt='[mdr] -> t1'	omdr it1
+ st=18	rt='[t1] + [r] -> q'	rac=3 ib oa oadder newv newc
+ st=19 	rt='[q] -> mar&t3'	oq imar it3 newz newn
+	nst=15
+
+*** Absolute ***
+ st=20	rt='[mdr] -> mar&t3'	omdr imar it3
+	nst=15
+
+*** Immediate ***
+ st=21 rt='[mdr] -> t2'		omdr it2
+
+
+
+*** Move dst information to temporary registers ***
+**** Check DAD ****
+ st=22
+	cond='ir64'	value=0 nst=24	
+        cond='ir64'	value=1 nst=28
+        cond='ir64'	value=2 nst=28
+        cond='ir64'	value=3 nst=25
+        nst=6
+
+ st=23	
+**** If addressing mode is index; absolute ****
+	cond='ir64'	value=4	nst=31
+	cond='ir64'	value=5 nst=34
+
+*** Add dst operand to t4 and dst address to t5 ***
+**** Register ****
+ st=24	rt='[r] -> t4'		rac=3 it4
+	nst=
+
+**** Autodecrement ****
+ st=25	rt='[r] -> t1'		rac=3 it1
+ st=26	rt='[t1] - 1 -> q'	oa comp oadder newv newc
+ st=27	rt='[q] -> r'		oq wac=3 newz newn
+	nst=
+
+**** Register Indirect and Autoincrement ****
+ st=28	rt='[r] -> mar&t5'	rac=3 imar it5
+ st=29	rt='[[mar]] -> mdr'	read
+ st=30	rt='[mdr] -> t4'	omdr it4 
+	nst=
+
+**** Index ****
+ st=31	rt='[mdr] -> t1'	omdr it1
+ st=32	rt='[t1] + [r] -> q'	rac=3 ib oa oadder newv newc
+ st=33 	rt='[q] -> mar&t5'	oq imar it5 newz newn
+	nst=15
+
+**** Absolute ****
+ st=34	rt='[mdr] -> mar&t5'	omdr imar it5
+	nst=15
+
+
+
+
+
+
+
+
+
+
 
 *** INC execution cycle ***
 *** Check DAD, if addressing modes not feasible a halt will occur ***
@@ -51,7 +132,7 @@
  st=72	rt='[t1] - 1 -> q'	oa comp oadder newv newc
  st=73	rt='[q] -> r'		oq wac=3 newz newn
 
-*** Register Indirect ***
+*** Register Indirect and Autoincrement***
  st=74	rt='[r] -> mar'		rac=3 imar
  st=75	rt='[[mar]] -> mdr'	read
  st=76	rt='[mdr] + 1 -> q'	omdr ib p1 oadder newv newc
@@ -64,3 +145,7 @@
  st=80	rt='[r]+1 -> q'		rac=3 ib p1 oadder newv newc
  st=81	rt='[q] -> r'		oq wac=3 newz newn
  	nst=0
+
+*** If any instructions are present except HALT or INC, a halt will occur. ***
+*** HALT execution cycle ***
+ st=100 halt
