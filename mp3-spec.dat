@@ -11,7 +11,7 @@
  st=3	rt='[pc]+1 -> q'	rac=1 rn=3 ib p1 oadder newv newc
  st=4	rt='[q] -> pc'		oq wac=1 wn=3 newz newn
 *** Check Instruction Type: Halt; Single Operand; Double Operand ***
-	cond='ir158'	value=0 nst=35
+	cond='ir158'	value=0 nst=36
 	cond='ir1512'	value=0 nst=22
 
 
@@ -107,20 +107,21 @@
 
 
 
-*** If any instructions are present except HALT or INC, a halt will occur. ***
-*** HALT execution cycle ***
- st=35 halt
-
-
-
 *** Check instruction ***
 	cond='ir1512'	value=0 nst=35
 **** Double Operand Instructions: ADD; SUB; MOVE ****
+
 **** Single Operand Instructions: INC; DEC; NEG****
  st=35
 	cond='ir118'	value=2	nst=70
 	cond='ir118'	value=3 nst=76
 	cond='ir118'	value=4 nst=83
+
+
+
+*** HALT execution cycle ***
+ st=36 halt
+
 
 
 *** INC execution cycle ***
