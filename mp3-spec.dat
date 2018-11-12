@@ -113,13 +113,15 @@
 **** Single Operand Instructions: INC; DEC; NEG****
  st=35
 	cond='ir118'	value=2	nst=70
+	cond='ir118'	value=3 nst=76
+	cond='ir118'	value=4 nst=83
 
 
 *** INC execution cycle ***
  st=70 	rt='[t4]+1->q'		ot4 ib p1 oadder newv newc
 	cond='ir64'	value=0 nst=75
  
-**** Handle not register ****
+**** Handle not register addressing ****
  st=71  rt='[q] -> mdr'		oq imdr newz newn
  st=72  rt='[t5] -> mar'	ot5 imar
  st=73	rt='[mdr] -> [mar]'	write
@@ -131,6 +133,47 @@
 
 **** Handle register ****
  st=75	rt='[q] -> r'		oq wac=3 newz newn
+	nst=0
+
+
+
+*** DEC execution cycle ***
+ st=76	rt='[t4] -> t1'		ot4 it1
+ st=77	rt='[t1] - 1 -> q'	oa comp oadder newv newc
+	cond='ir64'	value=0 nst=82
+ 
+**** Handle not register addressing ****
+ st=78  rt='[q] -> mdr'		oq imdr newz newn
+ st=79  rt='[t5] -> mar'	ot5 imar
+ st=80	rt='[mdr] -> [mar]'	write
+	cond='ir64'	value=2 nst=81
+ 	nst=0
+
+**** Handle autoincrement ****
+ st=81	rt='[t5] +1 -> q'	ot5 ib p1 oadder newv newc
+
+**** Handle register ****
+ st=82	rt='[q] -> r'		oq wac=3 newz newn
+	nst=0
+
+
+
+*** NEG execution cycle ***
+ st=83 	rt='0-[t4] -> q'	ot4 ib comp p1 oadder newv newc
+	cond='ir64'	value=0 nst=88
+
+**** Handle not register addressing ****
+ st=84  rt='[q] -> mdr'		oq imdr newz newn
+ st=85  rt='[t5] -> mar'	ot5 imar
+ st=86	rt='[mdr] -> [mar]'	write
+	cond='ir64'	value=2 nst=87
+ 	nst=0
+
+**** Handle autoincrement ****
+ st=87	rt='[t5] +1 -> q'	ot5 ib p1 oadder newv newc
+
+**** Handle register ****
+ st=88	rt='[q] -> r'		oq wac=3 newz newn
 	nst=0
 
 
