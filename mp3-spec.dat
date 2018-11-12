@@ -36,23 +36,23 @@
 
 *** Add src operand to t2 and src address to t3 ***
 **** Register ****
- st=10	rt='[r] -> t2'		rac=3 it2
+ st=10	rt='[r] -> t2'		rac=2 it2
 	nst=22
 
 **** Autodecrement ****
- st=11	rt='[r] -> t1'		rac=3 it1
+ st=11	rt='[r] -> t1'		rac=2 it1
  st=12	rt='[t1] - 1 -> q'	oa comp oadder newv newc
- st=13	rt='[q] -> r'		oq wac=3 newz newn
+ st=13	rt='[q] -> r'		oq wac=2 newz newn
 
 **** Register Indirect and Autoincrement ****
- st=14	rt='[r] -> mar&t3'	rac=3 imar it3
+ st=14	rt='[r] -> mar&t3'	rac=2 imar it3
  st=15	rt='[[mar]] -> mdr'	read
  st=16	rt='[mdr] -> t2'	omdr it2 
 	nst=22
 
 *** Index ***
  st=17	rt='[mdr] -> t1'	omdr it1
- st=18	rt='[t1] + [r] -> q'	rac=3 ib oa oadder newv newc
+ st=18	rt='[t1] + [r] -> q'	rac=2 ib oa oadder newv newc
  st=19 	rt='[q] -> mar&t3'	oq imar it3 newz newn
 	nst=15
 
