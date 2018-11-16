@@ -224,7 +224,7 @@
   
   
   
-  *** SUB execution cycle ***
+*** SUB execution cycle ***
  st=111	rt='[t4] -> t1'		ot4 it1
  st=112	rt='[t1] - [t2] -> q'	ot2 ib comp p1 oa oadder newv newc
 	cond='ir64'	value=0 nst=121
