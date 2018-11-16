@@ -11,7 +11,7 @@
  st=3	rt='[pc]+1 -> q'	rac=1 rn=3 ib p1 oadder newv newc
  st=4	rt='[q] -> pc'		oq wac=1 wn=3 newz newn
 *** Check Instruction Type: Halt; Single Operand; Double Operand ***
-	cond='ir158'	value=0 nst=36
+	cond='ir158'	value=0 nst=37
 	cond='ir1512'	value=0 nst=22
 
 
@@ -107,20 +107,21 @@
 
 
 
+ st=35
 *** Check instruction ***
-	cond='ir1512'	value=0 nst=35
+	cond='ir1512'	value=0 nst=36
 **** Double Operand Instructions: ADD; SUB; MOVE ****
 
 **** Single Operand Instructions: INC; DEC; NEG****
- st=35
+ st=36
 	cond='ir118'	value=2	nst=70
-	cond='ir118'	value=3 nst=76
-	cond='ir118'	value=4 nst=83
+	cond='ir118'	value=3 nst=77
+	cond='ir118'	value=4 nst=85
 
 
 
 *** HALT execution cycle ***
- st=36 halt
+ st=37 halt
 
 
 
@@ -155,7 +156,7 @@
  st=79  rt='[q] -> mdr'		oq imdr newz newn
  st=80  rt='[t5] -> mar'	ot5 imar
  st=81	rt='[mdr] -> [mar]'	write
-	cond='ir64'	value=2 nst=84
+	cond='ir64'	value=2 nst=82
  	nst=0
 
 **** Handle autoincrement ****
