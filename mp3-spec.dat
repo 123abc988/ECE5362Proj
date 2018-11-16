@@ -29,8 +29,7 @@
  st=7	rt='[[mar]] -> mdr'	read
  st=8	rt='[pc] + 1 -> q'	rac=1 rn=3 ib p1 oadder
  st=9	rt='[q] -> pc'		oq wac=1 wn=3
-*** If single-operand; index; absolute; immediate ***
-	cond='ir1512'	value=0 nst=23
+*** If index; absolute; immediate ***
 	cond='ir108'	value=4	nst=17
 	cond='ir108'	value=5 nst=20
 	cond='ir108'	value=6 nst=21
@@ -73,7 +72,7 @@
         cond='ir64'	value=1 nst=28
         cond='ir64'	value=2 nst=28
         cond='ir64'	value=3 nst=25
-        nst=6
+        nst=38
 
  st=23	
 **** If addressing mode is index; absolute; other ****
@@ -126,6 +125,14 @@
 *** HALT execution cycle ***
  st=37 halt
  
+
+*** Fetch additional word for dst ***
+ st=38	rt='[pc] -> mar'	imar rac=1 rn=3
+ st=39	rt='[[mar]] -> mdr'	read
+ st=40	rt='[pc] + 1 -> q'	rac=1 rn=3 ib p1 oadder
+ st=41	rt='[q] -> pc'		oq wac=1 wn=3
+*** If single-operand; index; absolute; immediate ***
+	nst=23
  
  
  
