@@ -76,9 +76,10 @@
         nst=6
 
  st=23	
-**** If addressing mode is index; absolute ****
+**** If addressing mode is index; absolute; other ****
 	cond='ir64'	value=4	nst=31
 	cond='ir64'	value=5 nst=34
+	nst=37
 
 *** Add dst operand to t4 and dst address to t5 ***
 **** Register ****
