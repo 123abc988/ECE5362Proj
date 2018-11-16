@@ -106,11 +106,11 @@
  st=35	rt='[mdr] -> t1'	omdr it1
  st=36	rt='[t1] + [r] -> q'	rac=3 ib oa oadder
  st=37 	rt='[q] -> mar&t5'	oq imar it5
-	nst=29
+	nst=33
 
 **** Absolute ****
  st=38	rt='[mdr] -> mar&t5'	omdr imar it5
-	nst=29
+	nst=33
 
 
 
