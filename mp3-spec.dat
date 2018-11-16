@@ -10,6 +10,7 @@
  st=2	rt='[mdr] -> ir'	omdr iir
  st=3	rt='[pc]+1 -> q'	rac=1 rn=3 ib p1 oadder
  st=4	rt='[q] -> pc'		oq wac=1 wn=3
+ 
 *** Check Instruction Type: Halt; Single Operand; Double Operand ***
 	cond='ir158'	value=0 nst=37
 	cond='ir1512'	value=0 nst=22
@@ -108,21 +109,22 @@
 
 
 *** Check instruction ***
- st=35
+  st=35
 	cond='ir1512'	value=0 nst=36
 **** Double Operand Instructions: ADD; SUB; MOVE ****
  	cond='ir1512'	value=1 nst=100
  	cond='ir1512'	value=2 nst=111
  	cond='ir1512'	value=3 nst=122
-		
+  
 **** Single Operand Instructions: INC; DEC; NEG****
  st=36
 	cond='ir118'	value=2	nst=70
-
-
+	cond='ir118'	value=3 nst=77
+	cond='ir118'	value=4 nst=85
 
 *** HALT execution cycle ***
  st=37 halt
+ 
  
  
  
@@ -130,7 +132,7 @@
  st=70 	rt='[t4]+1->q'		ot4 ib p1 oadder newv newc
 	cond='ir64'	value=0 nst=76
  
-**** Handle not register ****
+**** Handle not register addressing ****
  st=71  rt='[q] -> mdr'		oq imdr newz newn
  st=72  rt='[t5] -> mar'	ot5 imar
  st=73	rt='[mdr] -> [mar]'	write
@@ -140,11 +142,58 @@
 **** Handle autoincrement ****
  st=74	rt='[t5] +1 -> q'	ot5 ib p1 oadder
  st=75	rt='[q] -> r'		oq wac=3
-	nst=0
+ 	nst=0
 
 **** Handle register ****
  st=76	rt='[q] -> r'		oq wac=3 newz newn
 	nst=0
+
+
+
+*** DEC execution cycle ***
+ st=77	rt='[t4] -> t1'		ot4 it1
+ st=78	rt='[t1] - 1 -> q'	oa comp oadder newv newc
+	cond='ir64'	value=0 nst=84
+ 
+**** Handle not register addressing ****
+ st=79  rt='[q] -> mdr'		oq imdr newz newn
+ st=80  rt='[t5] -> mar'	ot5 imar
+ st=81	rt='[mdr] -> [mar]'	write
+	cond='ir64'	value=2 nst=82
+ 	nst=0
+
+**** Handle autoincrement ****
+ st=82	rt='[t5] +1 -> q'	ot5 ib p1 oadder
+ st=83	rt='[q] -> r'		oq wac=3
+ 	nst=0
+	
+**** Handle register ****
+ st=84	rt='[q] -> r'		oq wac=3 newz newn
+	nst=0
+
+
+
+*** NEG execution cycle ***
+ st=85 	rt='0-[t4] -> q'	ot4 ib comp p1 oadder newv newc
+	cond='ir64'	value=0 nst=91
+
+**** Handle not register addressing ****
+ st=86  rt='[q] -> mdr'		oq imdr newz newn
+ st=87  rt='[t5] -> mar'	ot5 imar
+ st=88	rt='[mdr] -> [mar]'	write
+	cond='ir64'	value=2 nst=89
+ 	nst=0
+
+**** Handle autoincrement ****
+ st=89	rt='[t5] +1 -> q'	ot5 ib p1 oadder
+ st=90	rt='[q] -> r'		oq wac=3
+ 	nst=0
+	
+**** Handle register ****
+ st=91	rt='[q] -> r'		oq wac=3 newz newn
+  nst=0
+
+
 
 
 *** ADD execution cycle ***
@@ -170,11 +219,11 @@
 **** Handle register DAD ****
  st=110	rt='[q] -> r'		oq wac=3 newz newn
 	cond='ir108'	value=2 nst=106
-	nst=0
-
-
-
-*** SUB execution cycle ***
+  nst=0
+  
+  
+  
+  *** SUB execution cycle ***
  st=111	rt='[t4] -> t1'		ot4 it1
  st=112	rt='[t1] - [t2] -> q'	ot2 ib comp p1 oa oadder newv newc
 	cond='ir64'	value=0 nst=121
@@ -198,6 +247,7 @@
  st=121	rt='[q] -> r'		oq wac=3 newz newn
 	cond='ir108'	value=2 nst=117
 	nst=0
+
 
 
 *** MOVE execution cycle ***
