@@ -12,7 +12,7 @@
  st=4	rt='[q] -> pc'		oq wac=1 wn=3
  
 *** Check Instruction Type: Halt; Single Operand; Double Operand ***
-	cond='ir158'	value=0 nst=37
+	cond='ir158'	value=0 nst=41
 	cond='ir1512'	value=0 nst=22
 
 
@@ -33,6 +33,7 @@
 	cond='ir108'	value=4	nst=17
 	cond='ir108'	value=5 nst=20
 	cond='ir108'	value=6 nst=21
+	nst=41
 
 *** Add src operand to t2 and src address to t3 ***
 **** Register ****
@@ -68,71 +69,69 @@
 *** Move dst information to temporary registers ***
 **** Check DAD, fetch 2nd word if necessary ****
  st=22
-	cond='ir64'	value=0 nst=24	
-        cond='ir64'	value=1 nst=28
-        cond='ir64'	value=2 nst=28
-        cond='ir64'	value=3 nst=25
-        nst=38
+	cond='ir64'	value=0 nst=28	
+        cond='ir64'	value=1 nst=32
+        cond='ir64'	value=2 nst=32
+        cond='ir64'	value=3 nst=29
 
- st=23	
+*** Fetch additional word for dst ***
+ st=23	rt='[pc] -> mar'	imar rac=1 rn=3
+ st=24	rt='[[mar]] -> mdr'	read
+ st=25	rt='[pc] + 1 -> q'	rac=1 rn=3 ib p1 oadder
+ st=26	rt='[q] -> pc'		oq wac=1 wn=3
+
 **** If addressing mode is index; absolute; other ****
-	cond='ir64'	value=4	nst=31
-	cond='ir64'	value=5 nst=34
-	nst=37
+ st=27
+	cond='ir64'	value=4	nst=35
+	cond='ir64'	value=5 nst=38
+	nst=41
 
 *** Add dst operand to t4 and dst address to t5 ***
 **** Register ****
- st=24	rt='[r] -> t4'		rac=3 it4
-	nst=35
+ st=28	rt='[r] -> t4'		rac=3 it4
+	nst=39
 
 **** Autodecrement ****
- st=25	rt='[r] -> t1'		rac=3 it1
- st=26	rt='[t1] - 1 -> q'	oa comp oadder
- st=27	rt='[q] -> r'		oq wac=3
+ st=29	rt='[r] -> t1'		rac=3 it1
+ st=30	rt='[t1] - 1 -> q'	oa comp oadder
+ st=31	rt='[q] -> r'		oq wac=3
 
 **** Register Indirect and Autoincrement ****
- st=28	rt='[r] -> mar&t5'	rac=3 imar it5
- st=29	rt='[[mar]] -> mdr'	read
- st=30	rt='[mdr] -> t4'	omdr it4 
-	nst=35
+ st=32	rt='[r] -> mar&t5'	rac=3 imar it5
+ st=33	rt='[[mar]] -> mdr'	read
+ st=34	rt='[mdr] -> t4'	omdr it4 
+	nst=39
 
 **** Index ****
- st=31	rt='[mdr] -> t1'	omdr it1
- st=32	rt='[t1] + [r] -> q'	rac=3 ib oa oadder
- st=33 	rt='[q] -> mar&t5'	oq imar it5
+ st=35	rt='[mdr] -> t1'	omdr it1
+ st=36	rt='[t1] + [r] -> q'	rac=3 ib oa oadder
+ st=37 	rt='[q] -> mar&t5'	oq imar it5
 	nst=29
 
 **** Absolute ****
- st=34	rt='[mdr] -> mar&t5'	omdr imar it5
+ st=38	rt='[mdr] -> mar&t5'	omdr imar it5
 	nst=29
 
 
 
 *** Check instruction ***
-  st=35
-	cond='ir1512'	value=0 nst=36
+  st=39
+	cond='ir1512'	value=0 nst=40
 **** Double Operand Instructions: ADD; SUB; MOVE ****
  	cond='ir1512'	value=1 nst=100
  	cond='ir1512'	value=2 nst=111
  	cond='ir1512'	value=3 nst=122
   
 **** Single Operand Instructions: INC; DEC; NEG****
- st=36
+ st=40
 	cond='ir118'	value=2	nst=70
 	cond='ir118'	value=3 nst=77
 	cond='ir118'	value=4 nst=85
 
 *** HALT execution cycle ***
- st=37 halt
+ st=41 halt
  
 
-*** Fetch additional word for dst ***
- st=38	rt='[pc] -> mar'	imar rac=1 rn=3
- st=39	rt='[[mar]] -> mdr'	read
- st=40	rt='[pc] + 1 -> q'	rac=1 rn=3 ib p1 oadder
- st=41	rt='[q] -> pc'		oq wac=1 wn=3
-*** If single-operand; index; absolute; immediate ***
-	nst=23
  
  
  
