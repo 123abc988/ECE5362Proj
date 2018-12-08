@@ -240,7 +240,7 @@
 	cond='ir108'	value=2 nst=117
  st=116
 	cond='ir64'	value=2 nst=119
- 	nst=0
+ 	nst=132
 
 **** Handle autoincrement ****
  st=117	rt='[t3] + 1 -> q'	ot3 ib p1 oadder
@@ -248,13 +248,12 @@
 	nst=116
  st=119	rt='[t5] + 1 -> q'	ot5 ib p1 oadder
  st=120 rt='[q] -> r'		oq wac=3
-	nst=0
+	nst=132
         
 **** Handle register DAD ****
  st=121	rt='[q] -> r'		oq wac=3 newz newn
 	cond='ir108'	value=2 nst=117
-	nst=0
-
+	nst=132
 
 
 *** MOVE execution cycle ***
@@ -279,4 +278,12 @@
 **** Handle register DAD ****
  st=131	rt='[t2] -> r'		ot2 wac=3 newz newn clrv clrc
 	cond='ir108'	value=2 nst=127
+	nst=0
+
+**** Handle C for SUB ****
+ st=132
+	cond='c'	value=0 nst = 134
+ st=133 rt='0 -> c'		clrc
+	nst=0
+ st=134 rt='1 -> c'		setc
 	nst=0
