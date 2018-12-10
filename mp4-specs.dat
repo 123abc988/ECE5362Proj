@@ -358,33 +358,33 @@
 
 *** EXG execution cycle ***
  st=135 rt='check DAD'
-	cond='ir64'	value=0 nst=147
+	cond='ir64'	value=0 nst=146
  st=136 rt='[t2] -> mdr'	ot2 imdr
  st=137 rt='[t5] -> mar'	ot5 imar
  st=138 rt='[mdr] -> [mar]'	write
- 	cond='ir108'	value=0 nst=148
- st=140 rt='[t4] -> mdr'	ot4 imdr
- st=141 rt='[t3] -> mar'	ot3 imar
- st=142 rt='[mdr] -> [mar]'	write
-	cond='ir108'	value=2 nst=143
-	cond='ir64'	value=2 nst=145
+ 	cond='ir108'	value=0 nst=147
+ st=139 rt='[t4] -> mdr'	ot4 imdr
+ st=140 rt='[t3] -> mar'	ot3 imar
+ st=141 rt='[mdr] -> [mar]'	write
+	cond='ir108'	value=2 nst=142
+	cond='ir64'	value=2 nst=144
 	nst=0
 
 **** Handle autoincrement ****
- st=143 rt='[t3] + 1 -> q'	ot3 ib p1 oadder
- st=144 rt='[q] -> r'		oq wac=2
-	cond='ir64'	value=2 nst=145
+ st=142 rt='[t3] + 1 -> q'	ot3 ib p1 oadder
+ st=143 rt='[q] -> r'		oq wac=2
+	cond='ir64'	value=2 nst=144
 	nst=0
- st=145 rt='[t5] + 1 -> q'	ot5 ib p1 oadder
- st=146 rt='[q] -> r'		oq wac=3
+ st=144 rt='[t5] + 1 -> q'	ot5 ib p1 oadder
+ st=145 rt='[q] -> r'		oq wac=3
 	nst=0
 
 **** Handle register ****
- st=147 rt='[t2] -> r'		ot2 wac=3
-	cond='ir108'	value=2 nst=143
-	cond='ir108'	value=0 nst=148
+ st=146 rt='[t2] -> r'		ot2 wac=3
+	cond='ir108'	value=2 nst=142
+	cond='ir108'	value=0 nst=147
 	nst=140
- st=148 rt='[t4] -> r'		ot4 wac=2
+ st=147 rt='[t4] -> r'		ot4 wac=2
 	nst=0
 
 
@@ -406,7 +406,7 @@
  st=157 rt='[q] -> r'		oq wac=3
 	nst=0
 
- st=158	rt='[q] -> r'		oq wac=3
+ st=158	rt='[q] -> r'		oq wac=3 newz newn clrv clrc
  	nst=0
 
 
@@ -432,7 +432,7 @@
  st=171 rt='[q] -> r'		oq wac=3
 	nst=0
 
- st=172	rt='[q] -> r'		oq wac=3
+ st=172	rt='[q] -> r'		oq wac=3 newz newn clrv clrc
  	nst=0
 
 
@@ -597,3 +597,4 @@
  st=283 rt='[t1] + 1 -> q'	oa p1 oadder
  st=284 rt='[q] -> sp'		oq wac=1 wn=2
  	nst=0
+
