@@ -123,6 +123,9 @@
  	cond='ir1512'	value=1 nst=100
  	cond='ir1512'	value=2 nst=111
  	cond='ir1512'	value=3 nst=122
+	cond='ir1512'	value=4	nst=135
+	cond='ir1512'	value=5 nst=150
+	cond='ir1512'	value=6 nst=160
   
 **** Single Operand Instructions: CLR; INC; DEC; NEG; COMP; JMP; JSR; TST****
  st=40
