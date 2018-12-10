@@ -1,0 +1,45 @@
+********  test 1
+0004 AC
+0007 X
+0006 SP
+0000 PC
+0000 CVZN
+0A50 dbra n
+0008
+0001
+0200 inc ac
+0203 inc pc
+0302 dec sp
+0811 tst(x)
+0000 halt
+0005 8:
+********  test 2
+0008 AC
+00FF X
+0008 SP
+0004 PC
+1101 CVZN
+3018 move sp(ac)
+5208 or (sp)+ ac
+0643 jmp n(pc)
+0002
+0650 jmp n
+0001
+0301 dec x
+0000 halt
+2F66 8:
+********  test 3
+000B AC
+0009 X
+0008 SP
+0000 PC
+0000 CVZN
+0500 comp ac
+4022 exg ac (sp)+
+3039 move sp -(x)
+6408 and n(sp) ac
+FFFF
+0411 neg(x)
+0150 clr n
+0008
+FFF5 8:
