@@ -348,20 +348,20 @@
  st=162 rt='![t4] -> q'		ot4 ib comp oadder
  st=163 rt='[q] OR [t1] -> q'	ot1 oq ib oadder
  st=164 rt='![q] -> q'		oq ib comp oadder
-	cond='ir64'	value=0 nst=170
- st=164 rt='[q] -> mdr'		oq imdr newz newn
- st=165 rt='[t5] -> mar'	ot5 imar
- st=165 rt='[mdr] -> [mar]'	write clrv clrc
-	cond='ir108'	value=2	nst=166
-	cond='ir64'	value=2	nst=168
+	cond='ir64'	value=0 nst=172
+ st=165 rt='[q] -> mdr'		oq imdr newz newn
+ st=166 rt='[t5] -> mar'	ot5 imar
+ st=167 rt='[mdr] -> [mar]'	write clrv clrc
+	cond='ir108'	value=2	nst=168
+	cond='ir64'	value=2	nst=170
 
- st=166	rt='[t3] + 1 -> q'	ot3 ib p1 oadder
- st=167 rt='[q] -> r'		oq wac=2
-	cond='ir64'	value=2 nst=168
+ st=168	rt='[t3] + 1 -> q'	ot3 ib p1 oadder
+ st=169 rt='[q] -> r'		oq wac=2
+	cond='ir64'	value=2 nst=170
 	nst=0
- st=168	rt='[t5] + 1 -> q'	ot5 ib p1 oadder
- st=169 rt='[q] -> r'		oq wac=3
+ st=170	rt='[t5] + 1 -> q'	ot5 ib p1 oadder
+ st=171 rt='[q] -> r'		oq wac=3
 	nst=0
 
- st=170	rt='[q] -> r'		oq wac=3
+ st=172	rt='[q] -> r'		oq wac=3
  	nst=0
