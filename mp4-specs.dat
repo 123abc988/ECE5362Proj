@@ -30,8 +30,8 @@
  st=8	rt='[pc] + 1 -> q'	rac=1 rn=3 ib p1 oadder
  st=9	rt='[q] -> pc'		oq wac=1 wn=3
 *** If DBRA; index; absolute; immediate ***
-	cond='ir108'	value=0 nst=260
-	cond='ir118'	value=10 nst=270
+	cond='ir108'	value=0 nst=250
+	cond='ir118'	value=10 nst=268
 	cond='ir108'	value=4	nst=17
 	cond='ir108'	value=5 nst=20
 	cond='ir108'	value=6 nst=21
@@ -358,33 +358,33 @@
 
 *** EXG execution cycle ***
  st=135 rt='check DAD'
-	cond='ir64'	value=0 nst=146
+	cond='ir64'	value=0 nst=147
  st=136 rt='[t2] -> mdr'	ot2 imdr
  st=137 rt='[t5] -> mar'	ot5 imar
  st=138 rt='[mdr] -> [mar]'	write
- 	cond='ir108'	value=0 nst=147
- st=139 rt='[t4] -> mdr'	ot4 imdr
- st=140 rt='[t3] -> mar'	ot3 imar
- st=141 rt='[mdr] -> [mar]'	write
-	cond='ir108'	value=2 nst=142
-	cond='ir64'	value=2 nst=144
+ 	cond='ir108'	value=0 nst=148
+ st=140 rt='[t4] -> mdr'	ot4 imdr
+ st=141 rt='[t3] -> mar'	ot3 imar
+ st=142 rt='[mdr] -> [mar]'	write
+	cond='ir108'	value=2 nst=143
+	cond='ir64'	value=2 nst=145
 	nst=0
 
 **** Handle autoincrement ****
- st=142 rt='[t3] + 1 -> q'	ot3 ib p1 oadder
- st=143 rt='[q] -> r'		oq wac=2
-	cond='ir64'	value=2 nst=144
+ st=143 rt='[t3] + 1 -> q'	ot3 ib p1 oadder
+ st=144 rt='[q] -> r'		oq wac=2
+	cond='ir64'	value=2 nst=145
 	nst=0
- st=144 rt='[t5] + 1 -> q'	ot5 ib p1 oadder
- st=145 rt='[q] -> r'		oq wac=3
+ st=145 rt='[t5] + 1 -> q'	ot5 ib p1 oadder
+ st=146 rt='[q] -> r'		oq wac=3
 	nst=0
 
 **** Handle register ****
- st=146 rt='[t2] -> r'		ot2 wac=3
-	cond='ir108'	value=2 nst=142
-	cond='ir108'	value=0 nst=147
+ st=147 rt='[t2] -> r'		ot2 wac=3
+	cond='ir108'	value=2 nst=143
+	cond='ir108'	value=0 nst=148
 	nst=140
- st=147 rt='[t4] -> r'		ot4 wac=2
+ st=148 rt='[t4] -> r'		ot4 wac=2
 	nst=0
 
 
@@ -407,7 +407,7 @@
  st=157 rt='[q] -> r'		oq wac=3
 	nst=0
 
- st=158	rt='[q] -> r'		oq wac=3 newz newn clrv clrc
+ st=158	rt='[q] -> r'		oq wac=3
  	nst=0
 
 
@@ -434,7 +434,7 @@
  st=171 rt='[q] -> r'		oq wac=3
 	nst=0
 
- st=172	rt='[q] -> r'		oq wac=3 newz newn clrv clrc
+ st=172	rt='[q] -> r'		oq wac=3
  	nst=0
 
 
@@ -491,7 +491,7 @@
 	cond='ir64'	value=0 nst=226
  
 **** Handle not register addressing ****
- st=221 rt='[t5] -> pc'		ot4 wac=1 wn=3
+ st=221 rt='[t5] -> pc'		ot5 wac=1 wn=3
 	cond='ir64'	value=2 nst=224
  	nst=0
 
@@ -517,7 +517,7 @@
  st=232	rt='[t1] - 1 -> q'	oa comp oadder
  st=233 rt='[q] -> sp & mar'	oq imar wac=1 wn=2
  st=234 rt='[pc] -> mdr'	rac=1 rn=3 imdr
- st=235 rt='[t5] -> pc'		ot4 wac=1 wn=3
+ st=235 rt='[t5] -> pc'		ot5 wac=1 wn=3
  st=236 rt='[mdr] -> mar'	write
 	cond='ir64'	value=2 nst=237
  	nst=0
@@ -563,21 +563,21 @@
  st=263 rt='[t5] -> mar'	ot5 imar
  st=264	rt='[mdr] -> [mar]'	write
 	cond='ir64'	value=2 nst=265
- 	nst=268
+ 	nst=6
 
 **** Handle autoincrement ****
  st=265	rt='[t5] +1 -> q'	ot5 ib p1 oadder
  st=266	rt='[q] -> r'		oq wac=3
- 	nst=268
+ 	nst=6
 	
 **** Handle register ****
  st=267	rt='[q] -> r & T1'	oq wac=3
-	nst=268
+	nst=6
 
 **** Check for BRA ****
  st=268 rt='[t1] + 1 -> q'	oa p1 oadder
  st=269 rt='q -> t1'		oq it1
-	cond='busz'	value=1	nst=6
+	cond='busz'	value=0	nst=270
 	nst=0
 	
 **** BRA ****
@@ -599,4 +599,3 @@
  st=283 rt='[t1] + 1 -> q'	oa p1 oadder
  st=284 rt='[q] -> sp'		oq wac=1 wn=2
  	nst=0
-
