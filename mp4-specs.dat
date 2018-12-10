@@ -150,7 +150,8 @@
 
 *** Check BRA or RTS ***
  st=43	
-	cond='ibrch'	value=0 nst=6
+	cond='ir1'	value=1 nst=6
+	cond='ir0'	value=1 nst=6
 	nst=280
  
 
@@ -546,7 +547,7 @@
 
 
 
-*** BRNCH execution cycle ***
+*** BRA execution cycle ***
  st=250	
 	cond='ibrch'	value=1 nst=251
 	cond='ir5'	value=1 nst=252
