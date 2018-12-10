@@ -1,0 +1,31 @@
+********  test 1
+0004 AC
+0007 X
+0006 SP
+0000 PC
+0000 CVZN
+0038 set C
+0034 set V
+0032 set Z
+0031 set N
+0028 clr C
+0024 clr V
+0022 clr Z
+0021 clr N
+0000 halt
+********  test 2
+0004 AC
+0007 X
+0008 SP
+0000 PC
+0000 CVZN
+0201 inc x
+0100 clr ac
+0082 bne
+0001
+0102 clr sp
+0111 clr [x]
+0092 beq
+0001
+FFEF 8:
+0000 halt
