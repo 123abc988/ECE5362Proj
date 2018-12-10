@@ -121,7 +121,9 @@
  	cond='ir1512'	value=1 nst=100
  	cond='ir1512'	value=2 nst=111
  	cond='ir1512'	value=3 nst=122
-	cond=
+	cond='ir1512'	value=4	nst=135
+	cond='ir1512'	value=5 nst=150
+	cond='ir1512'	value=6 nst=160
   
 **** Single Operand Instructions: INC; DEC; NEG****
  st=40
@@ -199,7 +201,7 @@
 	
 **** Handle register ****
  st=91	rt='[q] -> r'		oq wac=3 newz newn
-  	nst=0
+  nst=0
 
 
 
@@ -289,100 +291,77 @@
  st=134 rt='1 -> c'		setc
 	nst=0
 
-
-
-
-*** CLR execution cycle ***
- st=200	rt='0 -> q'		oadder
-	cond='ir64'	value=0 nst=206
- 
-**** Handle not register addressing ****
- st=201 rt='[q] -> mdr'		oq imdr newz newn clrv clrc
- st=202 rt='[t5] -> mar'	ot5 imar
- st=203	rt='[mdr] -> [mar]'	write
-	cond='ir64'	value=2 nst=204
- 	nst=0
-
-**** Handle autoincrement ****
- st=204	rt='[t5] + 1 -> q'	ot5 ib p1 oadder
- st=205	rt='[q] -> r'		oq wac=3
- 	nst=0
-
-**** Handle register ****
- st=206	rt='[q] -> r'		oq wac=3 newz newn clrv clrc
+**** EXG execution cycle ****
+ st=135 rt='check DAD'
+	cond='ir64'	value=0 nst=147
+ st=136 rt='[t2] -> mdr'	ot2 imdr
+ st=137 rt='[t5] -> mar'	ot5 imar
+ st=138 rt='[mdr] -> [mar]'	write
+ 	cond='ir108'	value=0 nst=148
+ st=140 rt='[t4] -> mdr'	ot4 imdr
+ st=141 rt='[t3] -> mar'	ot3 imar
+ st=142 rt='[mdr] -> [mar]'	write
+	cond='ir108'	value=2 nst=143
+	cond='ir64'	value=2 nst=145
 	nst=0
 
-
-
-
-*** COMP execution cycle ***
- st=210	rt='0-[t4] -> q'	ot4 ib comp oadder
-	cond='ir64'	value=0 nst=216
- 
-**** Handle not register addressing ****
- st=211 rt='[q] -> mdr'		oq imdr newz newn clrv clrc
- st=212 rt='[t5] -> mar'	ot5 imar
- st=213	rt='[mdr] -> [mar]'	write
-	cond='ir64'	value=2 nst=214
- 	nst=0
-
 **** Handle autoincrement ****
- st=214	rt='[t5] + 1 -> q'	ot5 ib p1 oadder
- st=215	rt='[q] -> r'		oq wac=3
- 	nst=0
-
-**** Handle register ****
- st=216	rt='[q] -> r'		oq wac=3 newz newn clrv clrc
+ st=143 rt='[t3] + 1 -> q'	ot3 ib p1 oadder
+ st=144 rt='[q] -> r'		oq wac=2
+	cond='ir64'	value=2 nst=145
+	nst=0
+ st=145 rt='[t5] + 1 -> q'	ot5 ib p1 oadder
+ st=146 rt='[q] -> r'		oq wac=3
 	nst=0
 
-
-
-
-*** JMP execution cycle ***
- st=220	
-	cond='ir64'	value=0 nst=226
- 
-**** Handle not register addressing ****
- st=221 rt='[t5] -> pc'		ot4 wac=1 wn=3
-	cond='ir64'	value=2 nst=224
- 	nst=0
-
-**** Handle autoincrement ****
- st=224	rt='[t5] + 1 -> q'	ot5 ib p1 oadder
- st=225	rt='[q] -> r'		oq wac=3
- 	nst=0
-
 **** Handle register ****
- st=226	halt
+ st=147 rt='[t2] -> r'		ot2 wac=3
+	cond='ir108'	value=2 nst=143
+	cond='ir108'	value=0 nst=148
+	nst=140
+ st=148 rt='[t4] -> r'		ot4 wac=2
+	nst=0
 
+**** OR execution cycle ****
+ st=150 rt='[t2] OR [t4] -> q'	ot2 ot4 ib oadder
+ 	cond='ir64'	value=0	nst=158
+ st=151 rt='[q] -> mdr'		oq imdr newz newn
+ st=152 rt='[t5] -> mar'	ot5 imar
+ st=153 rt='[mdr] -> [mar]'	write clrv clrc
+	cond='ir108'	value=2	nst=154
+	cond='ir64'	value=2	nst=156
 
+ st=154	rt='[t3] + 1 -> q'	ot3 ib p1 oadder
+ st=155 rt='[q] -> r'		oq wac=2
+	cond='ir64'	value=2 nst=156
+	nst=0
+ st=156	rt='[t5] + 1 -> q'	ot5 ib p1 oadder
+ st=157 rt='[q] -> r'		oq wac=3
+	nst=0
 
-
-*** JSR execution cycle ***
- st=220	
-	cond='ir64'	value=0 nst=230
- 
-**** Handle not register addressing ****
- st=222 rt='[sp] -> t1'		rac=1 rn=2 it1
- st=223	rt='[t1] - 1 -> q'	oa comp oadder
- st=224 rt='[q] -> sp & mar'	oq imar wac=1 wn=2
- st=225 rt='[pc] -> mdr'	rac=1 rn=3 imdr
- st=226 rt='[t5] -> pc'		ot4 wac=1 wn=3
- st=227 rt='[mdr] -> mar'	write
-	cond='ir64'	value=2 nst=228
+ st=158	rt='[q] -> r'		oq wac=3
  	nst=0
 
-**** Handle autoincrement ****
- st=228	rt='[t5] + 1 -> q'	ot5 ib p1 oadder
- st=229	rt='[q] -> r'		oq wac=3
+**** AND execution cycle ****
+ st=160 rt='![t2] -> q'		ot2 ib comp oadder
+ st=161 rt='[q] -> t1'		oq it1
+ st=162 rt='![t4] -> q'		ot4 ib comp oadder
+ st=163 rt='[q] OR [t1] -> q'	ot1 oq ib oadder
+ st=164 rt='![q] -> q'		oq ib comp oadder
+	cond='ir64'	value=0 nst=170
+ st=164 rt='[q] -> mdr'		oq imdr newz newn
+ st=165 rt='[t5] -> mar'	ot5 imar
+ st=165 rt='[mdr] -> [mar]'	write clrv clrc
+	cond='ir108'	value=2	nst=166
+	cond='ir64'	value=2	nst=168
+
+ st=166	rt='[t3] + 1 -> q'	ot3 ib p1 oadder
+ st=167 rt='[q] -> r'		oq wac=2
+	cond='ir64'	value=2 nst=168
+	nst=0
+ st=168	rt='[t5] + 1 -> q'	ot5 ib p1 oadder
+ st=169 rt='[q] -> r'		oq wac=3
+	nst=0
+
+ st=170	rt='[q] -> r'		oq wac=3
  	nst=0
-
-**** Handle register ****
- st=230	halt
-
-
-
-
-*** TST execution cycle ***
- st=235 rt='[t4]->t1'		ot4 it1 newz newn clrc clrv
-	nxt=0
