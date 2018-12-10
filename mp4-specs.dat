@@ -397,6 +397,7 @@
  st=153 rt='[mdr] -> [mar]'	write clrv clrc
 	cond='ir108'	value=2	nst=154
 	cond='ir64'	value=2	nst=156
+	nst = 0
 
  st=154	rt='[t3] + 1 -> q'	ot3 ib p1 oadder
  st=155 rt='[q] -> r'		oq wac=2
@@ -423,6 +424,7 @@
  st=167 rt='[mdr] -> [mar]'	write clrv clrc
 	cond='ir108'	value=2	nst=168
 	cond='ir64'	value=2	nst=170
+	nst = 0
 
  st=168	rt='[t3] + 1 -> q'	ot3 ib p1 oadder
  st=169 rt='[q] -> r'		oq wac=2
