@@ -12,7 +12,7 @@
  st=4	rt='[q] -> pc'		oq wac=1 wn=3
  
 *** Check Instruction Type: Halt; Single Operand; Double Operand ***
-	cond='ir158'	value=0 nst=42
+	cond='ir158'	value=0 nst=41
 	cond='ir1512'	value=0 nst=22
 
 
@@ -169,12 +169,15 @@
 
 **** Clear Z ****
  st=48	rt='q->t1'	oq it1 newz
+	nst=0
 
 **** Clear V ****
  st=49	rt='0->v'	clrv
+	nst=0
 
 **** Clear C ****
  st=50	rt='0->c'	clrc
+	nst=0
  
 **** Select CLR ****
  st=51
@@ -185,16 +188,20 @@
 **** Set N ****
  st=52	rt='-1->q'	comp oadder
  st=53	rt='q->t1'	oq it1 newn
+	nst=0
 
 **** Set Z ****
  st=54	rt='0->q'	oadder
  st=55	rt='q->t1'	oq it1 newz
+	nst=0
 
 **** Set V ****
  st=56	rt='1->v'	setv
+	nst=0
 
 **** Set C ****
  st=57	rt='1->v'	setc
+	nst=0
 
 
 
