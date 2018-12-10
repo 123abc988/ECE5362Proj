@@ -30,8 +30,8 @@
  st=8	rt='[pc] + 1 -> q'	rac=1 rn=3 ib p1 oadder
  st=9	rt='[q] -> pc'		oq wac=1 wn=3
 *** If DBRA; index; absolute; immediate ***
-	cond='ir108'	value=0 nst=260
-	cond='ir118'	value=10 nst=270
+	cond='ir108'	value=0 nst=250
+	cond='ir118'	value=10 nst=268
 	cond='ir108'	value=4	nst=17
 	cond='ir108'	value=5 nst=20
 	cond='ir108'	value=6 nst=21
@@ -119,7 +119,7 @@
 *** Check instruction ***
   st=39
 	cond='ir1512'	value=0 nst=40
-**** Double Operand Instructions: ADD; SUB; MOVE ****
+**** Double Operand Instructions: ADD; SUB; MOVE; EXG; OR; AND ****
  	cond='ir1512'	value=1 nst=100
  	cond='ir1512'	value=2 nst=111
  	cond='ir1512'	value=3 nst=122
@@ -437,7 +437,7 @@
 
  st=172	rt='[q] -> r'		oq wac=3 newz newn clrv clrc
 	cond='ir108'	value=2	nst=168 	
-	nst=0
+ 	nst=0
 
 
 
@@ -493,7 +493,7 @@
 	cond='ir64'	value=0 nst=226
  
 **** Handle not register addressing ****
- st=221 rt='[t5] -> pc'		ot4 wac=1 wn=3
+ st=221 rt='[t5] -> pc'		ot5 wac=1 wn=3
 	cond='ir64'	value=2 nst=224
  	nst=0
 
@@ -519,7 +519,7 @@
  st=232	rt='[t1] - 1 -> q'	oa comp oadder
  st=233 rt='[q] -> sp & mar'	oq imar wac=1 wn=2
  st=234 rt='[pc] -> mdr'	rac=1 rn=3 imdr
- st=235 rt='[t5] -> pc'		ot4 wac=1 wn=3
+ st=235 rt='[t5] -> pc'		ot5 wac=1 wn=3
  st=236 rt='[mdr] -> mar'	write
 	cond='ir64'	value=2 nst=237
  	nst=0
@@ -565,21 +565,21 @@
  st=263 rt='[t5] -> mar'	ot5 imar
  st=264	rt='[mdr] -> [mar]'	write
 	cond='ir64'	value=2 nst=265
- 	nst=268
+ 	nst=6
 
 **** Handle autoincrement ****
  st=265	rt='[t5] +1 -> q'	ot5 ib p1 oadder
  st=266	rt='[q] -> r'		oq wac=3
- 	nst=268
+ 	nst=6
 	
 **** Handle register ****
  st=267	rt='[q] -> r & T1'	oq wac=3
-	nst=268
+	nst=6
 
 **** Check for BRA ****
  st=268 rt='[t1] + 1 -> q'	oa p1 oadder
  st=269 rt='q -> t1'		oq it1
-	cond='busz'	value=1	nst=6
+	cond='busz'	value=0	nst=270
 	nst=0
 	
 **** BRA ****
@@ -601,4 +601,3 @@
  st=283 rt='[t1] + 1 -> q'	oa p1 oadder
  st=284 rt='[q] -> sp'		oq wac=1 wn=2
  	nst=0
-
