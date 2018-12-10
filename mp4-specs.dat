@@ -381,10 +381,10 @@
 
 **** Handle register ****
  st=146 rt='[t2] -> r'		ot2 wac=3
-	cond='ir108'	value=2 nst=142
 	cond='ir108'	value=0 nst=147
-	nst=140
+	nst=139
  st=147 rt='[t4] -> r'		ot4 wac=2
+	cond='ir64'	value=2 nst=144
 	nst=0
 
 
@@ -601,3 +601,4 @@
  st=283 rt='[t1] + 1 -> q'	oa p1 oadder
  st=284 rt='[q] -> sp'		oq wac=1 wn=2
  	nst=0
+ 
